@@ -15,17 +15,21 @@ export const fetchUsers = async (usersNumber: number = 50): Promise<IUser[]> => 
     const names = ['Ivan', 'Viktor', 'Vladimir', 'Anton', 'Sergey'];
     const surnames = ['Velichenko', 'Smirnov', 'Levashov', 'Smekhov', 'Voinov'];
     const maxAge = 65;
+    const minAge = 7;
 
     const createRandomUser = (): IUser => {
-        const getRandomNumber = (max: number) => Math.round(Math.random() * max);
+        const getRandomNumber = (max: number, min: number = 0) => {
+            const result = Math.round(Math.random() * max);
+            return (result < min) ? min : result;
+        };
 
         return {
             id: uuid4(),
-            name: names[getRandomNumber(names.length)],
-            surname: surnames[getRandomNumber(surnames.length)],
-            age: getRandomNumber(maxAge),
+            name: names[getRandomNumber(names.length - 1)],
+            surname: surnames[getRandomNumber(surnames.length - 1)],
+            age: getRandomNumber(maxAge, minAge),
         };
     };
 
-    return Array(usersNumber).map(() => createRandomUser());
+    return Array.from(Array(usersNumber), () => createRandomUser());
 };
