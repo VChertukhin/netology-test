@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
-import AutoSizer from "react-virtualized-auto-sizer";
+import AutoSizer from 'react-virtualized-auto-sizer';
 
 import { IAppState } from '@interfaces/interfaces';
 import { fetchUsersList } from '@redux/actions';
-import UserLine from '@components/UserLine';
+import { Loader, UserLine } from '@components';
 
 const useUsersListStyles = makeStyles(
     (theme: Theme) => createStyles({
@@ -49,7 +49,7 @@ const UsersList: FunctionComponent = () => {
     };
 
     if (usersList.length === 0) {
-        return <div>Loading...</div>
+        return <Loader />;
     }
 
     return (

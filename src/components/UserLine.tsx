@@ -19,7 +19,7 @@ const UserLine: FunctionComponent<IUserLineProps> = ({ index, style, user }) => 
                 primary={`User [${index ? index + 1 : ''}]: ${user.name} ${user.surname} - ${user.age}`}
             />
         </ListItem>
-    )
+    );
 };
 
 export default UserLine;
