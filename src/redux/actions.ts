@@ -33,6 +33,9 @@ export const fetchUsersList = (number: number): ThunkAction<Promise<void>, IAppS
     }
 );
 
+/**
+ * @param user - changed user (if user with this id doesn't exist in store -> nothing will happen)
+ */
 export const updateUserInUsersList = (user: IUser): ThunkAction<Promise<void>, IAppState, null, ActionsInterfaces.IUpdateUsersList> => (
     async (dispatch, getState) => {
         const { usersList: prevUsersList } = getState()
