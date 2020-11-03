@@ -40,6 +40,7 @@ const UsersList: FunctionComponent = () => {
 
         return (
             <UserLine
+                key={user.id}
                 index={index}
                 style={style}
                 user={user}
@@ -47,7 +48,7 @@ const UsersList: FunctionComponent = () => {
         );
     };
 
-    if (!usersList) {
+    if (usersList.length === 0) {
         return <div>Loading...</div>
     }
 

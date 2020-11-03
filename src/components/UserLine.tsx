@@ -14,7 +14,7 @@ interface IUserLineProps {
 // yet it's just a bolierplate
 const UserLine: FunctionComponent<IUserLineProps> = ({ index, style, user }) => {
     return (
-        <ListItem button style={style} key={user.id}>
+        <ListItem button style={style}>
             <ListItemText
                 primary={`User [${index ? index + 1 : ''}]: ${user.name} ${user.surname} - ${user.age}`}
             />
