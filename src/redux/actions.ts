@@ -11,6 +11,7 @@ import { fetchUsers } from '@services/usersService';
 export enum ActionTypes {
     UPDATE_USERS_LIST = 'UPDATE_USERS_LIST',
     FETCH_USERS = 'FETCH_USERS',
+    UPDATE_USER_IN_LIST = 'UPDATE_USER_IN_USERS_LIST',
 }
 
 export const updateUsersList = (usersList: IUser[]): ActionsInterfaces.IUpdateUsersList => ({
@@ -28,6 +29,26 @@ export const fetchUsersList = (number: number): ThunkAction<Promise<void>, IAppS
         dispatch({
             type: ActionTypes.UPDATE_USERS_LIST,
             payload: usersList,
+        });
+    }
+);
+
+export const updateUserInUsersList = (user: IUser): ThunkAction<Promise<void>, IAppState, null, ActionsInterfaces.IUpdateUsersList> => (
+    async (dispatch, getState) => {
+        const { usersList: prevUsersList } = getState()
+
+        prevUsersList.map((prevUser, index) => {
+            // we can use it since this are UUIDs
+            if (prevUser.id === user.id) {
+                // make a copy -> change element
+                const usersList = [...prevUsersList];
+                usersList.splice(index, 1, user);
+
+                dispatch({
+                    type: ActionTypes.UPDATE_USERS_LIST,
+                    payload: usersList,
+                });
+            }
         });
     }
 );

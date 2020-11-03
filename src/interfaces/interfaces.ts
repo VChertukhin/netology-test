@@ -20,6 +20,11 @@ export namespace ActionsInterfaces {
         /* number of users to fetch */
         payload: number;
     }
+
+    export interface IUpdateUserInUsersList {
+        type: ActionTypes.UPDATE_USER_IN_LIST;
+        payload: IUser;
+    }
 }
 
 export interface IAppState {
