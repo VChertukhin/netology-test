@@ -15,6 +15,7 @@ const getAlias = () => {
     const aliasList = [
         "interfaces",
         "components",
+        "redux",
         "services",
     ];
     // resolve "@interfaces", etc.
