@@ -31,10 +31,6 @@ const UsersList: FunctionComponent = () => {
         dispatch(fetchUsersList(5000));
     }, []);
 
-    useEffect(() => {
-        console.log(usersList);
-    }, [usersList]);
-
     const renderLine = ({ index, style }: ListChildComponentProps) => {
         const user = usersList[index];
 
