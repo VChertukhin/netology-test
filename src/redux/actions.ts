@@ -47,11 +47,18 @@ export const updateUserInUsersList = (user: IUser): ThunkAction<Promise<void>, I
                 const usersList = [...prevUsersList];
                 usersList.splice(index, 1, user);
 
-                dispatch({
-                    type: ActionTypes.UPDATE_USERS_LIST,
-                    payload: usersList,
-                });
+                dispatch(updateUsersList(usersList));
             }
         });
+    }
+);
+
+export const updateUsersListIsCheckedForAll = (isChecked: boolean): ThunkAction<Promise<void>, IAppState, null, ActionsInterfaces.IUpdateUsersList> => (
+    async (dispatch, getState) => {
+        const { usersList: prevUsersList } = getState();
+
+        const usersList = prevUsersList.map(user => ({ ...user, isChecked }));
+
+        dispatch(updateUsersList(usersList));
     }
 );
