@@ -7,6 +7,7 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 
 import { IAppState } from '@interfaces/interfaces';
 import { fetchUsersList } from '@redux/actions';
+import { selectUsersList } from '@redux/selectors';
 import { Loader, UserLine } from '@components';
 
 const useUsersListStyles = makeStyles(
@@ -23,7 +24,7 @@ const useUsersListStyles = makeStyles(
 const UsersList: FunctionComponent = () => {
     const classes = useUsersListStyles();
 
-    const usersList = useSelector(({ usersList }: IAppState) => usersList);
+    const usersList = useSelector(selectUsersList);
     const dispatch = useDispatch();
 
     // did mount effect
