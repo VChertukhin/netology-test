@@ -3,18 +3,28 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
 import AppBar from '@material-ui/core/AppBar';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { IUser } from '@interfaces/interfaces';
 import { setUserInUsersListIsChecked } from '@redux/actions';
 import { selectCheckedUsers } from '@redux/selectors';
 import { ContainerMedium } from '@components';
+import { scrollTableTopEvent } from '@utils/utils';
 
 const useUserListFooterStyles = makeStyles(
     (theme: Theme) => createStyles({
         footer: {
             top: 'auto',
             bottom: 0,
+        },
+        fabButton: {
+            position: 'absolute',
+            zIndex: 1,
+            top: -20,
+            right: 40,
         },
         contentWrapper: {
             display: 'flex',
@@ -54,6 +64,30 @@ const CheckedUser: FunctionComponent<ICheckedUser> = ({ user }) => {
     );
 };
 
+const ScrollTopFab: FunctionComponent = () => {
+    const classes = useUserListFooterStyles();
+    // we'll fire event that will move us to the table top
+    const handleClick = () => (
+        document.dispatchEvent(scrollTableTopEvent)
+    );
+
+    return (
+        <Tooltip
+            title="Scroll to the table top"
+            placement="top"
+        >
+            <Fab
+                color="primary"
+                size="small"
+                onClick={handleClick}
+                className={classes.fabButton}
+            >
+                <KeyboardArrowUpIcon />
+            </Fab>
+        </Tooltip>
+    );
+};
+
 const UsersListFooter: FunctionComponent = () => {
     const classes = useUserListFooterStyles();
 
@@ -71,6 +105,8 @@ const UsersListFooter: FunctionComponent = () => {
             color="default"
             className={classes.footer}
         >
+            <ScrollTopFab />
+
             <ContainerMedium>
                 <div className={classes.contentWrapper}>
                     {checkedUsers.map(user => (

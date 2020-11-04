@@ -1,11 +1,14 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, {
+    FunctionComponent,
+    useEffect,
+    useRef,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
-import { IAppState } from '@interfaces/interfaces';
 import { fetchUsersList } from '@redux/actions';
 import { selectUsersList } from '@redux/selectors';
 import { Loader, UserLine } from '@components';
@@ -25,6 +28,8 @@ const useUsersListStyles = makeStyles(
 const UsersList: FunctionComponent = () => {
     const classes = useUsersListStyles();
 
+    const tableRef = useRef<FixedSizeList>(null);
+
     const usersList = useSelector(selectUsersList);
     const dispatch = useDispatch();
 
@@ -32,6 +37,10 @@ const UsersList: FunctionComponent = () => {
     useEffect(() => {
         // YES! we will work with list of 5000 elements!
         dispatch(fetchUsersList(5000));
+        // custom  event handler
+        document.addEventListener('scrolltabletop', () => {
+            tableRef.current!.scrollTo(0);
+        });
     }, []);
 
     const renderLine = ({ index, style }: ListChildComponentProps) => {
@@ -55,6 +64,7 @@ const UsersList: FunctionComponent = () => {
             <AutoSizer>
                 {({ height, width }) => (
                     <FixedSizeList
+                        ref={tableRef}
                         height={height}
                         width={width}
                         itemSize={46}
