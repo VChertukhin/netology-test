@@ -12,6 +12,7 @@ import { IUser } from '@interfaces/interfaces';
 import { setUserInUsersListIsChecked } from '@redux/actions';
 import { selectCheckedUsers } from '@redux/selectors';
 import { ContainerMedium } from '@components';
+import { CheckedUser } from '@components/footer';
 import { scrollTableTopEvent } from '@utils/utils';
 
 const useUserListFooterStyles = makeStyles(
@@ -37,32 +38,6 @@ const useUserListFooterStyles = makeStyles(
         },
     }),
 );
-
-interface ICheckedUser {
-    user: IUser;
-}
-
-const CheckedUser: FunctionComponent<ICheckedUser> = ({ user }) => {
-    const classes = useUserListFooterStyles();
-
-    const { id: userId, name } = user;
-
-    const dispatch = useDispatch();
-
-    const handleDelete = () => {
-        dispatch(setUserInUsersListIsChecked(userId, false));
-    };
-
-    return (
-        <Chip
-            label={name}
-            className={classes.chip}
-            onDelete={handleDelete}
-            variant="outlined"
-            size="small"
-        />
-    );
-};
 
 const ScrollTopFab: FunctionComponent = () => {
     const classes = useUserListFooterStyles();
