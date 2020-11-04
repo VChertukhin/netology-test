@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useState, lazy } from 'react';
+import React, {
+    FunctionComponent,
+    useState,
+    lazy,
+    Suspense,
+} from 'react';
 import { useSelector } from 'react-redux';
 
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
@@ -9,7 +14,7 @@ import AppBar from '@material-ui/core/AppBar';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { selectCheckedUsers } from '@redux/selectors';
-import { ContainerMedium } from '@components';
+import { ContainerMedium, Loader } from '@components';
 import { CheckedUser } from '@components/footer';
 import { scrollTableTopEvent } from '@utils/utils';
 import { Toolbar } from '@material-ui/core';
@@ -85,10 +90,12 @@ const UsersListFooter: FunctionComponent = () => {
     return (
         <>
             {isModalOpened && (
-                <CheckedUserModal
-                    isOpened={isModalOpened}
-                    onClose={handleModalClose}
-                />
+                <Suspense fallback={<Loader />}>
+                    <CheckedUserModal
+                        isOpened={isModalOpened}
+                        onClose={handleModalClose}
+                    />
+                </Suspense>
             )}
 
             <Toolbar />
