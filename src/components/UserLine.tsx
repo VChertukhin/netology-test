@@ -63,7 +63,7 @@ const UserLine: FunctionComponent<IUserLineProps> = ({ style, user }) => {
                     <ListItemText
                         key={`${id}-prop-${prop}`}
                         className={classes.lineContentElement}
-                        primary={prop}
+                        primary={`${prop} ${(typeof prop === 'number') ? ' y.o.' : ''}`}
                     />
                 ))}
             </div>
