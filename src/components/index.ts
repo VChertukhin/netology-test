@@ -2,7 +2,7 @@ import App from '@components/App';
 import Loader from '@components/Loader';
 import UserLine from '@components/UserLine';
 import UsersList from '@components/UsersList';
-import UsersListHedaer from '@components/UsersListHeader';
+import UsersListHeader from '@components/UsersListHeader';
 import UsersListFooter from '@components/UsersListFooter';
 import ContainerMedium from '@components/ContainerMedium';
 
@@ -11,7 +11,7 @@ export {
     Loader,
     UserLine,
     UsersList,
-    UsersListHedaer,
+    UsersListHeader,
     UsersListFooter,
     ContainerMedium,
 };

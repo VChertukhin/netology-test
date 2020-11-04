@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import store from '@redux/store';
 import {
     UsersList,
-    UsersListHedaer,
+    UsersListHeader,
     UsersListFooter,
     ContainerMedium,
 } from '@components';
@@ -15,7 +15,7 @@ const App: FunctionComponent = () => (
     <Provider store={store}>
         <CssBaseline />
 
-        <UsersListHedaer />
+        <UsersListHeader />
 
         <ContainerMedium>
             <UsersList />
