@@ -37,7 +37,6 @@ const UsersList: FunctionComponent = () => {
         return (
             <UserLine
                 key={user.id}
-                index={index}
                 style={style}
                 user={user}
             />
