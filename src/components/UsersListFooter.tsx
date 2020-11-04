@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
@@ -10,7 +10,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { selectCheckedUsers } from '@redux/selectors';
 import { ContainerMedium } from '@components';
-import { CheckedUser } from '@components/footer';
+import { CheckedUser, CheckedUserModal } from '@components/footer';
 import { scrollTableTopEvent } from '@utils/utils';
 import { Toolbar } from '@material-ui/core';
 
@@ -65,16 +65,28 @@ const ScrollTopFab: FunctionComponent = () => {
 const UsersListFooter: FunctionComponent = () => {
     const classes = useUserListFooterStyles();
 
+    const [isModalOpened, setIsModalOpened] = useState(false);
+
     let checkedUsers = useSelector(selectCheckedUsers);
     let isOverlapping = false;
 
-    if (checkedUsers.length > 10) {
+    if (checkedUsers.length > 3) {
         isOverlapping = true;
-        checkedUsers = checkedUsers.slice(0, 10);
+        checkedUsers = checkedUsers.slice(0, 3);
     }
+
+    const handleModalOpen = () => setIsModalOpened(true);
+    const handleModalClose = () => setIsModalOpened(false);
 
     return (
         <>
+            {isModalOpened && (
+                <CheckedUserModal
+                    isOpened={isModalOpened}
+                    onClose={handleModalClose}
+                />
+            )}
+
             <Toolbar />
 
             <AppBar
@@ -95,10 +107,10 @@ const UsersListFooter: FunctionComponent = () => {
 
                         {isOverlapping && (
                             <Chip
-                                disabled
-                                label="And more..."
+                                label="See all"
+                                onClick={handleModalOpen}
                                 className={classes.chip}
-                                variant="outlined"
+                                color="primary"
                                 size="small"
                             />
                         )}
