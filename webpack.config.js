@@ -17,6 +17,7 @@ const getAlias = () => {
         "components",
         "redux",
         "services",
+        "utils",
     ];
     // resolve "@interfaces", etc.
     aliasList.map(aliasName => { aliasObj[`@${aliasName}`] = path.resolve(context, aliasName) });

@@ -11,6 +11,8 @@ import { updateUsersListIsCheckedForAll } from '@redux/actions';
 import { selectUsersListLength, selectCheckedUsersNumber } from '@redux/selectors';
 import { ContainerMedium } from '@components';
 
+import { debounce } from '@utils/utils';
+
 const UsersListHeader: FunctionComponent = () => {
     const dispatch = useDispatch();
 
@@ -21,15 +23,18 @@ const UsersListHeader: FunctionComponent = () => {
     // if all users are checked
     const isChecked = usersListLength === checkedUsersNumber;
 
-    const handleChecked = () => {
-        if (checkedUsersNumber < usersListLength) {
-            // select all then
-            dispatch(updateUsersListIsCheckedForAll(true));
-        } else {
-            // deselect all
-            dispatch(updateUsersListIsCheckedForAll(false));
+    // let's debounce this call as it may take time to execute if we click many times
+    const handleChecked = debounce(
+        () => {
+            if (checkedUsersNumber < usersListLength) {
+                // select all then
+                dispatch(updateUsersListIsCheckedForAll(true));
+            } else {
+                // deselect all
+                dispatch(updateUsersListIsCheckedForAll(false));
+            }
         }
-    };
+    );
 
     return (
         <AppBar position="fixed" color="default">
