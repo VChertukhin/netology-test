@@ -46,8 +46,13 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
-        filename: 'bundle.[hash:8].js',
+        filename: '[name].[hash:8].js',
         path: path.resolve(__dirname, "dist"),
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
     },
     plugins: [
         new HTMLWebpackPlugin({

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, lazy } from 'react';
 import { useSelector } from 'react-redux';
 
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
@@ -10,9 +10,13 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { selectCheckedUsers } from '@redux/selectors';
 import { ContainerMedium } from '@components';
-import { CheckedUser, CheckedUserModal } from '@components/footer';
+import { CheckedUser } from '@components/footer';
 import { scrollTableTopEvent } from '@utils/utils';
 import { Toolbar } from '@material-ui/core';
+
+const CheckedUserModal = lazy(
+    () => import('@components/footer/CheckedUsersModal')
+);
 
 const useUserListFooterStyles = makeStyles(
     (theme: Theme) => createStyles({
