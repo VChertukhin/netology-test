@@ -30,6 +30,6 @@ const App: FunctionComponent = () => {
             </Container>
         </Provider>
     );
-}
+};
 
 export default App;

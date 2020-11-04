@@ -38,7 +38,7 @@ export const fetchUsersList = (number: number): ThunkAction<Promise<void>, IAppS
  */
 export const updateUserInUsersList = (user: IUser): ThunkAction<Promise<void>, IAppState, null, ActionsInterfaces.IUpdateUsersList> => (
     async (dispatch, getState) => {
-        const { usersList: prevUsersList } = getState()
+        const { usersList: prevUsersList } = getState();
 
         prevUsersList.map((prevUser, index) => {
             // we can use it since this are UUIDs
