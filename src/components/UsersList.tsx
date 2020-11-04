@@ -11,7 +11,8 @@ import { Loader, UserLine } from '@components';
 
 const useUsersListStyles = makeStyles(
     (theme: Theme) => createStyles({
-        root: {
+        usersList: {
+            marginTop: theme.spacing(8), // app bar
             width: '100%',
             height: '100%',
             backgroundColor: theme.palette.background.paper,
@@ -48,7 +49,7 @@ const UsersList: FunctionComponent = () => {
     }
 
     return (
-        <div className={classes.root}>
+        <div className={classes.usersList}>
             <AutoSizer>
                 {({ height, width }) => (
                     <FixedSizeList
