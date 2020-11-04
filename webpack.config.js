@@ -64,5 +64,4 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
     ],
-    watch: true,
 };
