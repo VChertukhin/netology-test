@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
@@ -8,12 +8,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import AppBar from '@material-ui/core/AppBar';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
-import { IUser } from '@interfaces/interfaces';
-import { setUserInUsersListIsChecked } from '@redux/actions';
 import { selectCheckedUsers } from '@redux/selectors';
 import { ContainerMedium } from '@components';
 import { CheckedUser } from '@components/footer';
 import { scrollTableTopEvent } from '@utils/utils';
+import { Toolbar } from '@material-ui/core';
 
 const useUserListFooterStyles = makeStyles(
     (theme: Theme) => createStyles({
@@ -75,34 +74,38 @@ const UsersListFooter: FunctionComponent = () => {
     }
 
     return (
-        <AppBar
-            position="fixed"
-            color="default"
-            className={classes.footer}
-        >
-            <ScrollTopFab />
+        <>
+            <Toolbar />
 
-            <ContainerMedium>
-                <div className={classes.contentWrapper}>
-                    {checkedUsers.map(user => (
-                        <CheckedUser
-                            key={user.id}
-                            user={user}
-                        />
-                    ))}
+            <AppBar
+                position="fixed"
+                color="default"
+                className={classes.footer}
+            >
+                <ScrollTopFab />
 
-                    {isOverlapping && (
-                        <Chip
-                            disabled
-                            label="And more..."
-                            className={classes.chip}
-                            variant="outlined"
-                            size="small"
-                        />
-                    )}
-                </div>
-            </ContainerMedium>
-        </AppBar>
+                <ContainerMedium>
+                    <div className={classes.contentWrapper}>
+                        {checkedUsers.map(user => (
+                            <CheckedUser
+                                key={user.id}
+                                user={user}
+                            />
+                        ))}
+
+                        {isOverlapping && (
+                            <Chip
+                                disabled
+                                label="And more..."
+                                className={classes.chip}
+                                variant="outlined"
+                                size="small"
+                            />
+                        )}
+                    </div>
+                </ContainerMedium>
+            </AppBar>
+        </>
     );
 };
 

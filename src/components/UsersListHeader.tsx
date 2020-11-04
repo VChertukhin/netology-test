@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Checkbox from '@material-ui/core/Checkbox';
 
@@ -37,31 +38,35 @@ const UsersListHeader: FunctionComponent = () => {
     );
 
     return (
-        <AppBar position="fixed" color="default">
-            <ContainerMedium>
-                <ListItem>
-                    <ListItemIcon>
-                        <Checkbox
-                            edge="start"
-                            checked={isChecked}
-                            onChange={handleChecked}
-                            tabIndex={-1}
-                            disableRipple
+        <>
+            <AppBar position="fixed" color="default">
+                <ContainerMedium>
+                    <ListItem>
+                        <ListItemIcon>
+                            <Checkbox
+                                edge="start"
+                                checked={isChecked}
+                                onChange={handleChecked}
+                                tabIndex={-1}
+                                disableRipple
+                            />
+                        </ListItemIcon>
+
+                        <ListItemText primary={`Select all ${selectedNumberRatio}`} />
+
+                        <ListItemText
+                            primary={'Netology test App'}
+                            primaryTypographyProps={{
+                                align: 'right',
+                                variant: 'h6',
+                            }}
                         />
-                    </ListItemIcon>
+                    </ListItem>
+                </ContainerMedium>
+            </AppBar>
 
-                    <ListItemText primary={`Select all ${selectedNumberRatio}`} />
-
-                    <ListItemText
-                        primary={'Netology test App'}
-                        primaryTypographyProps={{
-                            align: 'right',
-                            variant: 'h6',
-                        }}
-                    />
-                </ListItem>
-            </ContainerMedium>
-        </AppBar>
+            <Toolbar />
+        </>
     );
 };
 
