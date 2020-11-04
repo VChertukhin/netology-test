@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import { IUser } from '@interfaces/interfaces';
-import { updateUserInUsersList } from '@redux/actions';
+import { setUserInUsersListIsChecked } from '@redux/actions';
 
 const useUserLineStyles = makeStyles(
     (theme: Theme) => createStyles({
@@ -39,7 +39,7 @@ const UserLine: FunctionComponent<IUserLineProps> = ({ style, user }) => {
     const dispatch = useDispatch();
 
     const handleChange = () => (
-        dispatch(updateUserInUsersList({ ...user, isChecked: !isChecked }))
+        dispatch(setUserInUsersListIsChecked(id, !isChecked))
     );
 
     return (
