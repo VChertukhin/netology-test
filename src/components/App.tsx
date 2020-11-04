@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
+import { Provider } from 'react-redux';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-
-import { Provider } from 'react-redux';
 
 import store from '@redux/store';
 import {
     UsersList,
     UsersListHedaer,
+    UsersListFooter,
     ContainerMedium,
 } from '@components';
 
@@ -20,6 +20,8 @@ const App: FunctionComponent = () => (
         <ContainerMedium>
             <UsersList />
         </ContainerMedium>
+
+        <UsersListFooter />
     </Provider>
 );
 

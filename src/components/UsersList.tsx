@@ -14,8 +14,9 @@ const useUsersListStyles = makeStyles(
     (theme: Theme) => createStyles({
         usersList: {
             marginTop: theme.spacing(8), // app bar
+            marginBottom: theme.spacing(8), // app bar
             width: '100%',
-            height: `calc(100vh - ${theme.spacing(8)}px)`,
+            height: `calc(100vh - ${theme.spacing(8 * 2)}px)`,
             backgroundColor: theme.palette.background.paper,
         },
     }),
