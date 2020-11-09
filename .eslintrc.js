@@ -35,6 +35,7 @@ module.exports = {
     rules: {
         semi: [2, 'always'],
         quotes: [2, 'single'],
+        'no-unused-vars': 2,
         'no-case-declarations': 0,
         '@typescript-eslint/no-namespace': 0,
         '@typescript-eslint/require-await': 0,

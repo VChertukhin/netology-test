@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 const useContainerStyles = makeStyles(
-    (theme: Theme) => createStyles({
+    () => createStyles({
         usersListContainer: {
             padding: 0,
         },
