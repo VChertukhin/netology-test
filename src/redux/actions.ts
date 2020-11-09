@@ -53,18 +53,14 @@ export const updateUsersListIsCheckedForAll = (isChecked: boolean): ThunkAction<
  * @param id - changed user (if user with this id doesn't exist in store -> nothing will happen)
  * @param isChecked - new isChecked value
  */
-export const setUserInUsersListIsChecked = (userId: string, isChecked: boolean): ThunkAction<Promise<void>, IAppState, null, ActionsInterfaces.IUpdateUsersList> => (
+export const setUserInUsersListIsChecked = (userId: string, isChecked: boolean): ThunkAction<Promise<void>, IAppState, null, ActionsInterfaces.IUpdateUserInUsersList> => (
     async (dispatch, getState) => {
         const { usersList: prevUsersList } = getState();
 
-        prevUsersList.map((prevUser, index) => {
+        prevUsersList.map(prevUser => {
             // we can use it since this are UUIDs
             if (prevUser.id === userId) {
-                // make a copy -> change element
-                const usersList = [...prevUsersList];
-                usersList.splice(index, 1, { ...prevUser, isChecked });
-
-                dispatch(updateUsersList(usersList));
+                dispatch(updateUserInUsersList({ ...prevUser, isChecked }));
             }
         });
     }

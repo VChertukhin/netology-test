@@ -15,14 +15,16 @@ const usersListReducer = (
             return action.payload;
         case ActionTypes.UPDATE_USER_IN_LIST:
             const { payload: changedUser } = action;
+            // we cant modify state object itself since redux makes shallow comparison
+            const newUsersList = [...state];
             // iterate over usersList and find changed one
             state.map((user, index) => {
                 // we can use it since this are UUIDs
                 if (user.id === changedUser.id) {
-                    state.splice(index, 1, changedUser);
+                    newUsersList.splice(index, 1, changedUser);
                 }
             });
-            return state;
+            return newUsersList;
         default:
             return state;
     }
