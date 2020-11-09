@@ -19,7 +19,13 @@ export const updateUsersList = (usersList: IUser[]): ActionsInterfaces.IUpdateUs
     payload: usersList,
 });
 
-// TODO: usedateUserInUsersList action
+/**
+ * @param user - changed user (if user with this id doesn't exist in store -> nothing will happen)
+ */
+export const updateUserInUsersList = (user: IUser): ActionsInterfaces.IUpdateUserInUsersList => ({
+    type: ActionTypes.UPDATE_USER_IN_LIST,
+    payload: user,
+});
 
 // side effect to fetch users
 export const fetchUsersList = (number: number): ThunkAction<Promise<void>, IAppState, null, ActionsInterfaces.IUpdateUsersList> => (
@@ -29,26 +35,6 @@ export const fetchUsersList = (number: number): ThunkAction<Promise<void>, IAppS
         dispatch({
             type: ActionTypes.UPDATE_USERS_LIST,
             payload: usersList,
-        });
-    }
-);
-
-/**
- * @param user - changed user (if user with this id doesn't exist in store -> nothing will happen)
- */
-export const updateUserInUsersList = (user: IUser): ThunkAction<Promise<void>, IAppState, null, ActionsInterfaces.IUpdateUsersList> => (
-    async (dispatch, getState) => {
-        const { usersList: prevUsersList } = getState();
-
-        prevUsersList.map((prevUser, index) => {
-            // we can use it since this are UUIDs
-            if (prevUser.id === user.id) {
-                // make a copy -> change element
-                const usersList = [...prevUsersList];
-                usersList.splice(index, 1, user);
-
-                dispatch(updateUsersList(usersList));
-            }
         });
     }
 );

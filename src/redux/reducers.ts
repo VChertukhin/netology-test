@@ -6,10 +6,23 @@ import {
 } from '@interfaces/interfaces';
 import { ActionTypes } from '@redux/actions';
 
-const usersListReducer = (state: IUser[] = [], action: ActionsInterfaces.IUpdateUsersList): IUser[] => {
+const usersListReducer = (
+    state: IUser[] = [],
+    action: ActionsInterfaces.IUpdateUsersList | ActionsInterfaces.IUpdateUserInUsersList,
+): IUser[] => {
     switch (action.type) {
         case ActionTypes.UPDATE_USERS_LIST:
             return action.payload;
+        case ActionTypes.UPDATE_USER_IN_LIST:
+            const { payload: changedUser } = action;
+            // iterate over usersList and find changed one
+            state.map((user, index) => {
+                // we can use it since this are UUIDs
+                if (user.id === changedUser.id) {
+                    state.splice(index, 1, changedUser);
+                }
+            });
+            return state;
         default:
             return state;
     }
