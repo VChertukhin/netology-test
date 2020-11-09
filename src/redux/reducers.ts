@@ -3,8 +3,21 @@ import { combineReducers } from 'redux';
 import {
     IUser,
     ActionsInterfaces,
+    FetchError,
 } from '@interfaces/interfaces';
 import { ActionTypes } from '@redux/actions';
+
+const fetchErrorReducer = (
+    state = null,
+    action: ActionsInterfaces.IUpdateFetchError,
+): FetchError => {
+    switch (action.type) {
+        case ActionTypes.UPDATE_FETCH_ERROR:
+            return action.payload;
+        default:
+            return state;
+    }
+};
 
 const usersListReducer = (
     state: IUser[] = [],
@@ -31,5 +44,6 @@ const usersListReducer = (
 };
 
 export default combineReducers({
+    fetchError: fetchErrorReducer,
     usersList: usersListReducer,
 });

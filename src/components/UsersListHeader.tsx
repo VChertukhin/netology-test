@@ -10,7 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import { updateUsersListIsCheckedForAll } from '@redux/actions';
 import { selectUsersListLength, selectCheckedUsersNumber } from '@redux/selectors';
-import { ContainerMedium } from '@components';
+import { ContainerMedium, FetchError } from '@components';
 
 import { debounce } from '@utils/utils';
 
@@ -54,8 +54,10 @@ const UsersListHeader: FunctionComponent = () => {
 
                         <ListItemText primary={`Select all ${selectedNumberRatio}`} />
 
+                        <FetchError />
+
                         <ListItemText
-                            primary={'Netology test App'}
+                            primary={'React test App'}
                             primaryTypographyProps={{
                                 align: 'right',
                                 variant: 'h6',

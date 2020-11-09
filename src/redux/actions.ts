@@ -4,15 +4,23 @@ import {
     IUser,
     IAppState,
     ActionsInterfaces,
+    FetchError,
 } from '@interfaces/interfaces';
 import { fetchUsers } from '@services/usersService';
+import { isDev } from '@utils/utils';
 
 // may be splitted to constants.ts later
 export enum ActionTypes {
     UPDATE_USERS_LIST = 'UPDATE_USERS_LIST',
     FETCH_USERS = 'FETCH_USERS',
     UPDATE_USER_IN_LIST = 'UPDATE_USER_IN_USERS_LIST',
+    UPDATE_FETCH_ERROR = 'UPDATE_FETCH_ERROR',
 }
+
+export const updateFetchEroor = (fetchError: FetchError): ActionsInterfaces.IUpdateFetchError => ({
+    type: ActionTypes.UPDATE_FETCH_ERROR,
+    payload: fetchError,
+});
 
 export const updateUsersList = (usersList: IUser[]): ActionsInterfaces.IUpdateUsersList => ({
     type: ActionTypes.UPDATE_USERS_LIST,
@@ -28,16 +36,23 @@ export const updateUserInUsersList = (user: IUser): ActionsInterfaces.IUpdateUse
 });
 
 // side effect to fetch users
-export const fetchUsersList = (number: number): ThunkAction<Promise<void>, IAppState, null, ActionsInterfaces.IUpdateUsersList> => (
-    async (dispatch) => {
-        const usersList = await fetchUsers(number);
+export const fetchUsersList = (
+    number: number,
+): ThunkAction<Promise<void>, IAppState, null, ActionsInterfaces.IUpdateUsersList | ActionsInterfaces.IUpdateFetchError> => {
+    return async (dispatch) => {
+        try {
+            const usersList = await fetchUsers(number);
 
-        dispatch({
-            type: ActionTypes.UPDATE_USERS_LIST,
-            payload: usersList,
-        });
-    }
-);
+            dispatch(updateUsersList(usersList));
+        } catch (e) {
+            if (isDev()) {
+                console.log(e);
+            }
+
+            dispatch(updateFetchEroor('Unable to fetch data: network connection problems'));
+        }
+    };
+};
 
 export const updateUsersListIsCheckedForAll = (isChecked: boolean): ThunkAction<Promise<void>, IAppState, null, ActionsInterfaces.IUpdateUsersList> => (
     async (dispatch, getState) => {

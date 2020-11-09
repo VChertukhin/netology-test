@@ -25,3 +25,5 @@ export const debounce = (fn: Fn, debounceIntervalMilliseconds: number = 250): Fn
  */
 export const scrollTableTopEvent = new CustomEvent('scrolltabletop');
 
+export const isDev = () => process.env.NODE_ENV === 'development';
+

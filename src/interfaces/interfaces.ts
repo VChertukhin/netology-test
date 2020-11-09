@@ -25,8 +25,16 @@ export namespace ActionsInterfaces {
         type: ActionTypes.UPDATE_USER_IN_LIST;
         payload: IUser;
     }
+
+    export interface IUpdateFetchError {
+        type: ActionTypes.UPDATE_FETCH_ERROR,
+        payload: FetchError,
+    }
 }
 
+export type FetchError = null | string;
+
 export interface IAppState {
+    fetchError: null | string;
     usersList: IUser[];
 }

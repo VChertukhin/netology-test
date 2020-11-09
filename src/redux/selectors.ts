@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 import { IAppState } from '@interfaces/interfaces';
 
-// as you use reselect in production I've decided to try it
+export const selectFetchError = ({ fetchError }: IAppState) => fetchError;
 
 export const selectUsersList = ({ usersList }: IAppState) => usersList;
 
