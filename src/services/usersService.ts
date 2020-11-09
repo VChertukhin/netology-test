@@ -31,5 +31,5 @@ export const fetchUsers = async (usersNumber: number = 50): Promise<IUser[]> => 
         };
     };
 
-    return Array.from(Array(usersNumber), () => createRandomUser());
+    return Array.from({ length: usersNumber }, () => createRandomUser());
 };
