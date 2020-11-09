@@ -2,10 +2,9 @@
   "name": "netology-test",
   "version": "1.0.0",
   "description": "Netology test solution",
-  "main": "src/index.js",
   "author": "Vladimir Chertukhin",
   "license": "MIT",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production",
@@ -46,6 +45,7 @@
     "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.6",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "uuid": "^8.3.1"
