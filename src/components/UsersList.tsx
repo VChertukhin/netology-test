@@ -36,9 +36,13 @@ const UsersList: FunctionComponent = () => {
         // YES! we will work with list of 5000 elements!
         dispatch(fetchUsersList(5000));
         // custom  event handler
-        document.addEventListener('scrolltabletop', () => {
+        const scrollTableTopHandler = () => {
             tableRef.current!.scrollTo(0);
-        });
+        };
+        document.addEventListener('scrolltabletop', scrollTableTopHandler);
+        // it's not necessary to unsubscribe as we use this listener for the entire app lifetime
+        // but anyway
+        () => document.removeEventListener('scrolltabletop', scrollTableTopHandler);
     }, []);
 
     const renderLine = ({ index, style }: ListChildComponentProps) => {
